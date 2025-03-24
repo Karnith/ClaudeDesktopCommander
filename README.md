@@ -20,6 +20,8 @@ Short version. Two key things. Terminal commands and diff based file editing.
 - [Testimonials](#testimonials)
 - [Contributing](#contributing)
 - [License](#license)
+- [Docker Deployment](#docker-deployment)
+- [SSE Server](#sse-server)
 
 This is server that allows Claude desktop app to execute long-running terminal commands on your computer and manage processes through Model Context Protocol (MCP) + Built on top of [MCP Filesystem Server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) to provide additional search and replace file editing capabilities .
 
@@ -193,8 +195,8 @@ https://www.youtube.com/watch?v=ly3bed99Dy8&lc=UgyQFTmYLJ4VBwIlmql4AaABAg](https
 [![it is a great tool, thank you, I like using it, as it gives claude an ability to do surgical edits, making it more like a human developer.](testemonials/img_3.png)
 https://www.youtube.com/watch?v=ly3bed99Dy8&lc=Ugy4-exy166_Ma7TH-h4AaABAg](https://www.youtube.com/watch?v=ly3bed99Dy8&lc=Ugy4-exy166_Ma7TH-h4AaABAg)
 
-[![You sir are my hero. You’ve pretty much summed up and described my experiences of late, much better than I could have. Cursor and Windsurf both had me frustrated to the point where I was almost yelling at my computer screen. Out of whimsy, I thought to myself why not just ask Claude directly, and haven’t looked back since.
-Claude first to keep my sanity in check, then if necessary, engage with other IDEs, frameworks, etc. I thought I was the only one, glad to see I’m not lol.
+[![You sir are my hero. You've pretty much summed up and described my experiences of late, much better than I could have. Cursor and Windsurf both had me frustrated to the point where I was almost yelling at my computer screen. Out of whimsy, I thought to myself why not just ask Claude directly, and haven't looked back since.
+Claude first to keep my sanity in check, then if necessary, engage with other IDEs, frameworks, etc. I thought I was the only one, glad to see I'm not lol.
 33
 1](testemonials/img_4.png)
 https://medium.com/@pharmx/you-sir-are-my-hero-62cff5836a3e](https://medium.com/@pharmx/you-sir-are-my-hero-62cff5836a3e)
@@ -217,3 +219,46 @@ If you find this tool valuable for your workflow, please consider [supporting th
 ## License
 
 MIT
+
+## Docker Deployment
+
+This project now supports Docker deployment for the SSE server:
+
+### Quick Start
+
+Deploy with the provided script:
+
+```bash
+# Start production server
+./deploy.sh
+
+# Start development server
+./deploy.sh -m dev
+
+# Start with custom port and endpoint
+./deploy.sh -p 8080 -e /mcp
+
+# Run in detached mode
+./deploy.sh -d
+
+# Stop the server
+./deploy.sh -a down
+```
+
+### Manual Deployment
+
+You can also use Docker Compose directly:
+
+```bash
+# Production mode
+docker-compose up
+
+# Development mode
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up
+```
+
+For more details on the Docker setup, see [SSE-README.md](./SSE-README.md#docker-deployment)
+
+## SSE Server
+
+For detailed information about the SSE Server implementation, see [SSE-README.md](./SSE-README.md)

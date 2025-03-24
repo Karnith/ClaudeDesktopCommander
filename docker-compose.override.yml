@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  mcp-sse-server:
+    build:
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: sh -c "npm run build && (node dist/sse-server.js & npx tsc --watch)" 

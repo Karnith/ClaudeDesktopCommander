@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mcp-sse-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mcp-sse-server
+    ports:
+      - "${PORT:-3337}:${PORT:-3337}"
+    volumes:
+      - ./config.json:/app/config.json
+    environment:
+      - NODE_ENV=production
+      - PORT=${PORT:-3337}
+      - ENDPOINT=${ENDPOINT:-/sse}
+      - HOST=0.0.0.0
+    restart: unless-stopped
+    command: npm run start:sse
+    env_file:
+      - .env 
